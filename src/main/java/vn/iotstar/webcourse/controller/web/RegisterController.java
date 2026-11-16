@@ -1,5 +1,6 @@
-package vn.iotstar.controller.web;
+package vn.iotstar.webcourse.controller.web;
 
+import vn.iotstar.webcourse.util.SecurityUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -19,10 +20,28 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        String password = SecurityUtil.hashPassword(req.getParameter("password"));
         String email = req.getParameter("email");
         String fullname = req.getParameter("fullname");
         String phone = req.getParameter("phone");
+        // OTP
+        String otp = String.format("%06d", new java.util.Random().nextInt(999999));
+
+
+        jakarta.servlet.http.HttpSession session = req.getSession();
+        session.setAttribute("pendingUser", user); // The User entity you populated from the form
+        session.setAttribute("generatedOtp", otp);
+
+        // email
+        boolean emailSent = EmailUtil.sendOtpEmail(user.getEmail(), otp);
+
+        if (emailSent) {
+            // Redirect to the OTP verification page
+            resp.sendRedirect(req.getContextPath() + "/verify-otp");
+        } else {
+            req.setAttribute("alert", "Lỗi gửi email. Vui lòng kiểm tra lại cấu hình SMTP.");
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
+        }
 
         UserService service = new UserServiceImpl();
 

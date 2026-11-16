@@ -1,6 +1,6 @@
-package vn.iotstar.webcourse.controller.Web;
+package vn.iotstar.webcourse.controller.web;
 
-
+import vn.iotstar.webcourse.util.SecurityUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        String password = SecurityUtil.hashPassword(req.getParameter("password"));
         String remember = req.getParameter("remember");
         boolean isRememberMe = "on".equals(remember);
 

@@ -3,6 +3,7 @@ package vn.iotstar.webcourse.model;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "[User]")
@@ -21,8 +22,12 @@ public class User implements Serializable {
     private String phone;
     private Date createdDate;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Video> videos;
+
     public User() {
     }
+
     public int getId() {
         return id;
     }
@@ -95,4 +100,11 @@ public class User implements Serializable {
         this.createdDate = createdDate;
     }
 
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
 }

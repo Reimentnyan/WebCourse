@@ -7,38 +7,39 @@
     <title>Đăng Nhập</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/login" method="post">
-        <h2>Đăng Nhập Vào Hệ Thống</h2>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <form action="${pageContext.request.contextPath}/login" method="post" class="needs-validation card p-4 shadow-sm" novalidate>
+            <h2 class="mb-3 text-center">Đăng Nhập Vào Hệ Thống</h2>
 
-        <c:if test="${alert != null}">
-            <h3 class="alert alert-danger">${alert}</h3>
-        </c:if>
+            <c:if test="${alert != null}">
+                <div class="alert alert-danger">${alert}</div>
+            </c:if>
 
-        <section>
-            <label class="input login-input">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" placeholder="Tài khoản" name="username" class="form-control" required>
+            <div class="mb-3">
+                <label class="form-label">Tài khoản</label>
+                <input type="text" placeholder="Tài khoản" name="username" class="form-control" required>
+                <div class="invalid-feedback">Vui lòng nhập tài khoản.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
+                <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                    <label class="form-check-label" for="remember">Nhớ tôi</label>
                 </div>
-            </label>
-        </section>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
 
-        <section>
-            <label class="input login-input">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
-                </div>
-            </label>
-        </section>
-
-        <section>
-            <input type="checkbox" name="remember"> Nhớ tôi
-            <a href="#" style="float: right;">Quên mật khẩu?</a>
-        </section>
-
-        <button type="submit" class="btn btn-primary">Đăng nhập</button>
-        <p>Nếu bạn chưa có tài khoản trên hệ thống, thì hãy <a href="${pageContext.request.contextPath}/register">Đăng ký</a></p>
-    </form>
+            <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+            <p class="mt-3 text-center mb-0">Nếu bạn chưa có tài khoản trên hệ thống, thì hãy <a href="${pageContext.request.contextPath}/register">Đăng ký</a></p>
+        </form>
+    </div>
+</div>
 </body>
 </html>

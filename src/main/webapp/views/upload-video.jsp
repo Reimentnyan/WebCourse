@@ -4,22 +4,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Upload Video</title>
+    <title>Tải Lên Video</title>
 </head>
 <body>
-<h2>Upload Video</h2>
-<c:if test="${message != null}">
-    <p>${message}</p>
-</c:if>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" action="${pageContext.request.contextPath}/upload-video" enctype="multipart/form-data" class="needs-validation card p-4 shadow-sm" novalidate>
+            <h2 class="mb-3 text-center">Tải Lên Video</h2>
 
-<form method="post" action="${pageContext.request.contextPath}/upload-video" enctype="multipart/form-data">
-    Title: <br />
-    <input type="text" name="title" size="100" required /> <br /><br />
-    Description: <br />
-    <input type="text" name="description" size="100" /> <br /><br />
-    Select video to upload: <br />
-    <input type="file" name="videoFile" accept="video/*" required /> <br /><br />
-    <input type="submit" value="Upload" />
-</form>
+            <c:if test="${message != null}">
+                <div class="alert alert-info">${message}</div>
+            </c:if>
+
+            <div class="mb-3">
+                <label class="form-label">Tiêu đề</label>
+                <input type="text" name="title" class="form-control" maxlength="255" required>
+                <div class="invalid-feedback">Vui lòng nhập tiêu đề video (tối đa 255 ký tự).</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mô tả</label>
+                <textarea name="description" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Chọn tệp video</label>
+                <input type="file" name="videoFile" class="form-control" accept="video/*" required>
+                <div class="invalid-feedback">Vui lòng chọn một tệp video hợp lệ.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Tải lên</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

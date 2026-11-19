@@ -41,10 +41,10 @@ public class RegisterController extends HttpServlet {
         }
 
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        user.setUserName(username);
+        user.setPassWord(password);
         user.setEmail(email);
-        user.setFullname(fullname);
+        user.setFullName(fullname);
         user.setPhone(phone);
 
         String otp = EmailUtil.generateOTP();

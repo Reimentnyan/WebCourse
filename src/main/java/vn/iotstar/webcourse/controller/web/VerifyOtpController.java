@@ -41,9 +41,9 @@ public class VerifyOtpController extends HttpServlet {
         User pendingUser = (User) session.getAttribute("pendingUser");
 
         if (generatedOtp != null && pendingUser != null && generatedOtp.equals(inputOtp)) {
-            userService.register(pendingUser.getUsername(),
-            pendingUser.getPassword(), pendingUser.getEmail(),
-            pendingUser.getFullname(), pendingUser.getPhone());
+            userService.register(pendingUser.getUserName(),
+            pendingUser.getPassWord(), pendingUser.getEmail(),
+            pendingUser.getFullName(), pendingUser.getPhone());
 
             session.removeAttribute("generatedOtp");
             session.removeAttribute("pendingUser");

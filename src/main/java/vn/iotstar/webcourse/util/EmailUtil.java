@@ -10,7 +10,7 @@ public class EmailUtil {
         return String.format("%06d", new Random().nextInt(999999));
     }
 
-    public static void sendOTP(String toEmail, String otp) {
+    public static boolean sendOTP(String toEmail, String otp) {
         String from = "khang.dongnguyen101@gmail.com";
         String password = "rlik qtkf ialb mums";
 
@@ -33,8 +33,10 @@ public class EmailUtil {
             msg.setSubject("Your OTP Code");
             msg.setText("Your verification code is: " + otp);
             Transport.send(msg);
+            return true;
         } catch (MessagingException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
